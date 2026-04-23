@@ -1,0 +1,2 @@
+PALETTE = "coolwarm"
+SCATTER_ALPHA = 0.2
