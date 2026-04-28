@@ -69,7 +69,7 @@ DadosGeoMedian = dados_geo_median()
 ModeloFinal = modelo_final()
 
 #Crie o título do app
-st.title("Previsão de Preços de Imóveis da Califórnia")
+st.title("Previsão de Preços de Imóveis da Califórnia 🏠🏠🏠")
 
 #Crie uma variável para ordenar os valores únicos de condados
 condados = sorted(DadosGeoMedian["name"].unique())
@@ -84,7 +84,7 @@ with coluna1:
     # Cria um formulário no Streamlit (evita atualização a cada input)
     with st.form(key="formulario"):
         # Selectbox para escolher o condado
-        escolher_condado = st.selectbox("Condado", condados)
+        escolher_condado = st.selectbox("🗺️ Condado", condados)
         
         # Pega longitude e latitude do condado selecionado
         longitude = DadosGeoMedian.query("name == @escolher_condado")["longitude"].values
@@ -100,7 +100,7 @@ with coluna1:
         households = DadosGeoMedian.query("name == @escolher_condado")["households"].values
 
         # Slider para renda média (em milhares de dólares)
-        median_income = st.slider("Renda média (milhares de US$)", 5.0, 100.0, 45.0, 5.0)
+        median_income = st.slider("💰 Renda média (milhares de US$)", 5.0, 100.0, 45.0, 5.0)
         
         # Ajusta escala da renda (modelo espera valores menores)
         escala_renda = median_income/10
@@ -113,46 +113,61 @@ with coluna1:
         
         # Converte renda contínua em categoria
         cat_escala_renda = np.digitize(escala_renda, bins=bins_income)
-
-
-        
-
-
-
-
-
-
-
-
-        
         
         # Features derivadas (já calculadas no dataset)
+        rooms_per_household = DadosGeoMedian.query("name == @escolher_condado")["rooms_per_household"].values
+        bedrooms_per_room = DadosGeoMedian.query("name == @escolher_condado")["bedrooms_per_room"].values
+        population_per_household = DadosGeoMedian.query("name == @escolher_condado")["population_per_household"].values
         
         # Monta dicionário com todas as variáveis de entrada do modelo
+        entradas = {
+            "longitude":longitude, "latitude": latitude, "housing_median_age": housing_median_age, "total_rooms": total_rooms,
+            "total_bedrooms": total_bedrooms, "population": population, "households": households, "median_income": escala_renda,
+            "ocean_proximity": ocean_proximity, "median_income_cat": cat_escala_renda, "rooms_per_household": rooms_per_household,
+            "bedrooms_per_room": bedrooms_per_room, "population_per_household": population_per_household
+        }
         
         # Converte entrada em DataFrame (formato esperado pelo modelo)
+        df_entradas = pd.DataFrame(entradas)
         
         # Botão para disparar a previsão
+        botao_previsao = st.form_submit_button("Prever o preço")
         
     # Quando o botão é clicado
+    if botao_previsao:
         # Faz a previsão com o modelo treinado
+        preco = ModeloFinal.predict(df_entradas)
     
         # Mostra o resultado formatado
-        
+        st.metric(label="💲 Preço previsto em US$", value=f"{preco[0][0]:.2f}")
 
 # =========================
 # COLUNA 2 → MAPA INTERATIVO
 # =========================
+with coluna2:
     # Define o estado inicial do mapa (posição e zoom)
-
+    start_point = pdk.ViewState(latitude=float(latitude[0]), longitude=float(longitude[0]), zoom=5, min_zoom=1, max_zoom=100)
+    
     # Camada com TODOS os condados (em azul)
+    counties_layer = pdk.Layer("PolygonLayer", data=DadosGeoMedian[["name", "geometry"]], get_polygon="geometry",
+                              get_fill_color=[0, 255, 0, 50], get_line_color=[255, 255, 255], get_line_width=50,
+                               pickable=True, auto_highlight=True)
     
     # Filtra o condado selecionado
+    select_counties = DadosGeoMedian.query("name == @escolher_condado")
     
     # Camada de destaque (condado selecionado em vermelho)
+    select_counties_layer = pdk.Layer("PolygonLayer", data=select_counties[["name", "geometry"]], get_polygon="geometry",
+                                      get_fill_color=[255, 0, 0, 100], get_line_color=[0, 0, 0], get_line_width=500,
+                                      pickable=True, auto_highlight=True)
     
     # Tooltip (informação ao passar o mouse)
+    tooltip = {"html": "Condado: {name}",
+               "style": {"backgroundColor": "steelblue", "color": "white", "fontsize": "10px"}
+              }
     
     # Cria o mapa com PyDeck
+    mapa_final = pdk.Deck(initial_view_state=start_point, map_style="light", layers=[counties_layer, select_counties_layer], tooltip=tooltip)
 
     # Renderiza o mapa no Streamlit
+    st.pydeck_chart(mapa_final)
