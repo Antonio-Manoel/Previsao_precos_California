@@ -21,9 +21,7 @@ No contexto do conjunto, um *household* (domicílio) refere-se a um grupo de pes
 
 - dados              <- Arquivos de dados para o projeto.
 - notebooks          <- Jupyter Notebooks.
-
-Dentro da pasta de notebooks, há uma segunda pasta chamada apoio, que são códigos-fonte para uso neste projeto. Nela, encontram-se:
-- auxiliares.py  <- Funções para ajudar na visualização de dados 
-- config.py    <- Configurações básicas do projeto
-- graficos.py  <- Funções para criação de gráficos personalizados
-- modelos.py  <- Funções para criação de modelos usados no projeto      
+  - auxiliares.py  <- Funções para ajudar na visualização de dados 
+  - config.py    <- Configurações básicas do projeto
+  - graficos.py  <- Funções para criação de gráficos personalizados
+  - modelos.py  <- Funções para criação de modelos usados no projeto      
