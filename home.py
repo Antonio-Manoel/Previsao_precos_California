@@ -9,7 +9,7 @@ import streamlit as st
 
 from joblib import load
 
-from apoio.config import DADOS_GEO_MEDIAN, DADOS_LIMPOS, MODELO_FINAL
+from notebooks.Apoio.config import DADOS_GEO_MEDIAN, DADOS_LIMPOS, MODELO_FINAL
 
 # ===============
 # Criação do app
