@@ -25,3 +25,6 @@ No contexto do conjunto, um *household* (domicílio) refere-se a um grupo de pes
   - config.py    <- Configurações básicas do projeto
   - graficos.py  <- Funções para criação de gráficos personalizados
   - modelos.py  <- Funções para criação de modelos usados no projeto      
+
+
+![IMAGEM](imagem1.png)
