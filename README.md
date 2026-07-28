@@ -9,6 +9,7 @@ Através de uma base de dados retirada do Kaggle, fiz um projeto dividido em alg
 
 
 **Origem dos dados:** https://www.kaggle.com/datasets/camnugent/california-housing-prices/data
+
 **Link do app:** https://previsaoprecoscaliforniagit-ku7w.streamlit.app/
 
 
@@ -31,4 +32,4 @@ No contexto do conjunto, um *household* (domicílio) refere-se a um grupo de pes
 
 
 ## Imagem do app finalizado
-![IMAGEM](imagem1.png)
+![IMAGEM](dados/imagem1.png)
