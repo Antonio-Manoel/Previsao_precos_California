@@ -7,7 +7,10 @@ Através de uma base de dados retirada do Kaggle, fiz um projeto dividido em alg
 - Machine Learning
 - Criação de um app com streamlit
 
+
 **Origem dos dados:** https://www.kaggle.com/datasets/camnugent/california-housing-prices/data
+**Link do app:** https://previsaoprecoscaliforniagit-ku7w.streamlit.app/
+
 
 ## Um pouco sobre a base
 Este conjunto de dados foi extraído do censo dos Estados Unidos de 1990 e está estruturado com uma linha para cada grupo de blocos censitários. Um grupo de blocos representa a menor unidade geográfica para a qual o Escritório do Censo divulga dados amostrais, geralmente abrangendo populações entre 600 e 3.000 pessoas.
@@ -27,4 +30,5 @@ No contexto do conjunto, um *household* (domicílio) refere-se a um grupo de pes
   - modelos.py  <- Funções para criação de modelos usados no projeto      
 
 
+## Imagem do app finalizado
 ![IMAGEM](imagem1.png)
