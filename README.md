@@ -19,12 +19,13 @@ No contexto do conjunto, um *household* (domicílio) refere-se a um grupo de pes
 
 ## Organização do projeto
 - .gitignore         <- Arquivos e diretórios a serem ignorados pelo Git
-- ambiente.yml       <- O arquivo de requisitos para reproduzir o ambiente de análise
+- requirements.txt       <- O arquivo de requisitos para reproduzir o ambiente de análise
 - LICENSE            <- Licença de código aberto (MIT)
 - README.md          <- README principal para desenvolvedores que usam este projeto.
 
 - dados              <- Arquivos de dados para o projeto.
 - notebooks          <- Jupyter Notebooks.
+- Apoio              <- Pasta com arquivos .py usados no projeto
   - auxiliares.py  <- Funções para ajudar na visualização de dados 
   - config.py    <- Configurações básicas do projeto
   - graficos.py  <- Funções para criação de gráficos personalizados
